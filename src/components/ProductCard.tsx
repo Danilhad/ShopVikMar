@@ -9,7 +9,6 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   return (
     <Card style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {/* Изображение товара */}
       <img
         alt={product.name}
         src={product.image}
@@ -22,7 +21,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }
         }}
       />
       
-      {/* Информация о товаре */}
       <div style={{ padding: 12, flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Text type="body-2" weight="2" style={{ marginBottom: 4 }}>
           {product.name}
