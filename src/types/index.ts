@@ -14,6 +14,22 @@ export interface TelegramUser {
   language_code?: string;
 }
 
+export interface AppError {
+  message: string;
+  code?: string;
+  timestamp: Date;
+}
+
+export interface UserProfileData {
+  id: number;
+  firstName: string;
+  lastName?: string;
+  username?: string;
+  photoUrl?: string;
+  languageCode?: string;
+  isPremium?: boolean;
+}
+
 export interface TelegramWebApp {
   initData: string;
   initDataUnsafe: {

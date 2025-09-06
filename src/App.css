@@ -1,0 +1,54 @@
+:root {
+  --tg-theme-section-bg-color: #ffffff;
+  --tg-theme-section-header-text-color: #222222;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tg-theme-section-bg-color: #0f0f0f;
+    --tg-theme-section-header-text-color: #ffffff;
+  }
+}
+
+.tma-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  background: var(--tg-theme-bg-color, #ffffff);
+  min-height: 100vh;
+  color: var(--tg-theme-text-color, #000000);
+}
+
+.tma-section {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--tg-theme-section-bg-color);
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--tg-theme-bg-color);
+}
+
+.error-container {
+  padding: 20px;
+  text-align: center;
+  background: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 600px) {
+  .tma-container {
+    padding: 12px;
+  }
+  
+  .tma-section {
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+}
