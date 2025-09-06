@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { retrieveLaunchParams, isRGB, type LaunchParams } from '@telegram-apps/sdk';
+import { retrieveLaunchParams, type LaunchParams } from '@telegram-apps/sdk';
 
 export const useTelegram = () => {
   const [launchParams, setLaunchParams] = useState<LaunchParams | null>(null);
