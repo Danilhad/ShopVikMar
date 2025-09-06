@@ -1,0 +1,9 @@
+/* src/fonts.css */
+@import 'sfpro-expo/dist/SFPro/400.css';
+@import 'sfpro-expo/dist/SFPro/500.css';
+@import 'sfpro-expo/dist/SFPro/600.css';
+@import 'sfpro-expo/dist/SFPro/700.css';
+
+:root {
+    --tg-font-family: 'SF Pro Expo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
