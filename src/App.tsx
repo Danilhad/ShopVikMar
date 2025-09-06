@@ -1,5 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useTelegram } from './hooks/useTelegram';
+import { useState } from 'react';
+import { 
+  Button,
+  Card,
+  Cell,
+  Divider,
+  Section,
+  Text,
+  Headline,
+  Title,
+  Caption
+} from '@telegram-apps/telegram-ui';
 import { ProductCard } from './components/ProductCard';
 import { Product } from './types';
 import './App.css';
@@ -14,7 +24,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 2,
-    name: "Чайная коллекция",
+    name: "Чайная коллекция", 
     price: 300,
     description: "Отборные сорта чая со всего мира",
     image: "https://via.placeholder.com/150"
@@ -29,66 +39,56 @@ const mockProducts: Product[] = [
 ];
 
 function App() {
-  const webApp = useTelegram();
   const [cart, setCart] = useState<Product[]>([]);
-
-  useEffect(() => {
-    if (webApp) {
-      webApp.MainButton.setText('Оформить заказ');
-      webApp.MainButton.onClick(() => {
-        webApp.showPopup({
-          title: 'Заказ оформлен!',
-          message: `Вы заказали ${cart.length} товаров на сумму ${
-            cart.reduce((sum, item) => sum + item.price, 0)
-          } ₽`,
-          buttons: [{ type: 'ok', text: 'OK' }]
-        });
-      });
-    }
-  }, [webApp, cart]);
-
-  useEffect(() => {
-    if (webApp) {
-      if (cart.length > 0) {
-        webApp.MainButton.show();
-      } else {
-        webApp.MainButton.hide();
-      }
-    }
-  }, [cart, webApp]);
 
   const handleAddToCart = (product: Product) => {
     setCart(prev => [...prev, product]);
-    if (webApp) {
-      webApp.showPopup({
-        title: 'Добавлено в корзину',
-        message: `${product.name} добавлен в корзину`,
-        buttons: [{ type: 'ok', text: 'OK' }]
-      });
-    }
   };
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>ShopVikMar</h1>
-        <p>Добро пожаловать в наш магазин!</p>
-      </header>
-      
-      <main className="products-grid">
-        {mockProducts.map(product => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={handleAddToCart}
-          />
-        ))}
-      </main>
+      <Section>
+        <Title level="1">VikMar Shop</Title>
+        <Title level="2">Добро пожаловать в магазин</Title>
+        <Caption>Второстепенный текст, подпись, пояснение или уведомление об ошибке.</Caption>
+      </Section>
+
+      <Divider />
+
+      <Section>
+        <Headline>Крупный текст для подзаголовков</Headline>
+        <div className="products-grid">
+          {mockProducts.map(product => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+            />
+          ))}
+        </div>
+      </Section>
 
       {cart.length > 0 && (
-        <div className="cart-info">
-          В корзине: {cart.length} товаров
-        </div>
+        <Section>
+          <Card>
+            <Cell
+              before="🛒"
+              after={
+                <Button 
+                  size="s" 
+                  onClick={() => alert(`Заказ на ${cart.reduce((sum, item) => sum + item.price, 0)} ₽`)}
+                >
+                  Оформить
+                </Button>
+              }
+            >
+              <Text>В корзине: {cart.length} товаров</Text>
+              <Text type="body-2" color="hint">
+                На сумму: {cart.reduce((sum, item) => sum + item.price, 0)} ₽
+              </Text>
+            </Cell>
+          </Card>
+        </Section>
       )}
     </div>
   );

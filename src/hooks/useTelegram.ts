@@ -1,24 +1,14 @@
 import { useEffect, useState } from 'react';
-import { TelegramWebApp } from '../types';
-
-declare global {
-  interface Window {
-    Telegram: {
-      WebApp: TelegramWebApp;
-    };
-  }
-}
+import { retrieveLaunchParams, isRGB, type LaunchParams } from '@telegram-apps/sdk';
 
 export const useTelegram = () => {
-  const [webApp, setWebApp] = useState<TelegramWebApp | null>(null);
+  const [launchParams, setLaunchParams] = useState<LaunchParams | null>(null);
 
   useEffect(() => {
-    const tg = window.Telegram?.WebApp;
-    if (tg) {
-      tg.ready();
-      setWebApp(tg);
-    }
+    // Получаем параметры запуска из Telegram
+    const lp = retrieveLaunchParams();
+    setLaunchParams(lp);
   }, []);
 
-  return webApp;
+  return launchParams;
 };
