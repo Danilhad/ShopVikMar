@@ -10,22 +10,11 @@
     {
       "src": "/(.*)",
       "dest": "/index.html",
-      "methods": ["GET"]
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "ALLOWALL"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors https://*.telegram.org"
-        }
-      ]
+      "methods": ["GET"],
+      "headers": {
+        "X-Frame-Options": "ALLOWALL",
+        "Content-Security-Policy": "frame-ancestors https://*.telegram.org"
+      }
     }
   ]
 }
