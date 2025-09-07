@@ -19,15 +19,15 @@ export const UserProfile = ({ className, launchParams }: UserProfileProps) => {
   return (
     <div className={className}>
       <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>
-        👤 Профиль
+        👤 Профиль {launchParams.isMock && '(тестовый режим)'}
       </div>
       
       <Cell
-        before={user.photoUrl ? <Avatar src={user.photoUrl} size={48} /> : undefined}
+        before={<Avatar size={48} />}
         subtitle={user.username ? `@${user.username}` : undefined}
         description="Имя пользователя"
       >
-        {user.firstName} {user.lastName || ''}
+        {user.first_name} {user.last_name || ''}
       </Cell>
       
       <Cell description="Ваш ID в Telegram">
@@ -35,10 +35,10 @@ export const UserProfile = ({ className, launchParams }: UserProfileProps) => {
       </Cell>
       
       <Cell description="Язык интерфейса">
-        {user.languageCode || 'Не указан'}
+        {user.language_code || 'Не указан'}
       </Cell>
       
-      {user.isPremium && (
+      {user.is_premium && (
         <Cell description="Статус аккаунта">
           ★ Premium-пользователь
         </Cell>

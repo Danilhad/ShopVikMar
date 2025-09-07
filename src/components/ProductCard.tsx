@@ -1,54 +1,58 @@
-import { Product } from '../types';
-import { Card, Button, Text } from '@telegram-apps/telegram-ui';
+import { Card, Button, Image, Cell } from '@telegram-apps/telegram-ui';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  description?: string;
+}
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: (product: Product) => void;
+  onBuy: (product: Product) => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+export const ProductCard = ({ product, onBuy }: ProductCardProps) => {
   return (
-    <Card style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <img
-        alt={product.name}
+    <Card
+      style={{
+        marginBottom: '16px',
+        overflow: 'hidden'
+      }}
+    >
+      <Image
         src={product.image}
+        alt={product.name}
         style={{
           width: '100%',
-          height: 120,
-          objectFit: 'cover',
-          borderTopLeftRadius: 12,
-          borderTopRightRadius: 12
+          height: '140px',
+          objectFit: 'cover'
         }}
       />
       
-      <div style={{ padding: 12, flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Text type="body-2" weight="2" style={{ marginBottom: 4 }}>
-          {product.name}
-        </Text>
-        
-        <Text type="caption-1" color="hint" style={{ 
-          flex: 1,
-          marginBottom: 8,
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden'
-        }}>
-          {product.description}
-        </Text>
-        
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text type="body-1" weight="2" style={{ color: 'var(--tgui--button_color)' }}>
-            {product.price} ₽
-          </Text>
-          <Button 
-            size="s" 
-            onClick={() => onAddToCart(product)}
+      <Cell
+        description={product.description}
+        after={
+          <Button
+            size="s"
+            onClick={() => onBuy(product)}
+            style={{ minWidth: '80px' }}
           >
             Купить
           </Button>
+        }
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontWeight: '500' }}>{product.name}</span>
+          <span style={{ 
+            fontWeight: '600',
+            color: 'var(--tg-theme-button-color)'
+          }}>
+            {product.price} ₽
+          </span>
         </div>
-      </div>
+      </Cell>
     </Card>
   );
 };
